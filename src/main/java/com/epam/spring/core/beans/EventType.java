@@ -4,5 +4,5 @@ import org.springframework.stereotype.Component;
 
 @Component
 public enum EventType {
-    DEBUG, INFO, ERROR
+    INFO, ERROR
 }

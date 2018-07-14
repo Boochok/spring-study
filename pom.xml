@@ -22,6 +22,8 @@
 
     <properties>
         <spring.ver>5.0.7.RELEASE</spring.ver>
+        <commons-io.ver>2.6</commons-io.ver>
+        <javax.annotation.ver>1.0</javax.annotation.ver>
     </properties>
 
     <dependencies>
@@ -49,8 +51,25 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.6</version>
+            <version>${commons-io.ver}</version>
         </dependency>
+
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>jsr250-api</artifactId>
+            <version>${javax.annotation.ver}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>jsr250-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>jsr250-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+
 
     </dependencies>
 

@@ -7,28 +7,28 @@ import com.epam.spring.core.loggers.EventLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
 
-import static com.epam.spring.core.beans.EventType.DEBUG;
+import static com.epam.spring.core.beans.EventType.ERROR;
 import static com.epam.spring.core.beans.EventType.INFO;
 
 public class App {
 
-    private Client client;
-
+    @Autowired
     @Qualifier("fileEventLogger")
     private EventLogger defaultEventLogger;
+
+    private Client client;
 
     private Map<EventType, EventLogger> loggers;
 
     @Autowired
-    public App(Client client, EventLogger defaultEventLogger, Map<EventType, EventLogger> loggers) {
+    public App(Client client, Map<EventType, EventLogger> loggers) {
         this.client = client;
-        this.defaultEventLogger = defaultEventLogger;
         this.loggers = loggers;
     }
 
@@ -43,13 +43,14 @@ public class App {
 
     public static void main(String[] args) throws IOException {
         ConfigurableApplicationContext ctx =
-                new ClassPathXmlApplicationContext("spring_config.xml");//it's possible to give several configs, Spring union them into one
+                new AnnotationConfigApplicationContext(AppConfig.class);//it's possible to give several configs, Spring union them into one
 
         //App app = (App) ctx.getBean("app") - by bean name
         App app = ctx.getBean(App.class);
 
-        app.logEvent("Some event for user 2", ctx.getBean(Event.class), DEBUG);
+        app.logEvent("Some event for user 2", ctx.getBean(Event.class), ERROR);
         app.logEvent("Some event for user 1", (Event) ctx.getBean("event"), INFO);
+        app.logEvent("Some event for user 34", (Event) ctx.getBean("event"), null);
 
         ctx.close();
     }
