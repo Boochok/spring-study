@@ -1,10 +1,11 @@
 package com.epam.spring.core.loggers;
 
 import com.epam.spring.core.beans.Event;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Collection;
-
+@Component
 public class CombinedEventLogger implements EventLogger {
 
     private Collection<EventLogger> loggers;

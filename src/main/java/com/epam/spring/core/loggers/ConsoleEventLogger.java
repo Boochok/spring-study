@@ -1,7 +1,9 @@
 package com.epam.spring.core.loggers;
 
 import com.epam.spring.core.beans.Event;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ConsoleEventLogger implements EventLogger {
 
     @Override

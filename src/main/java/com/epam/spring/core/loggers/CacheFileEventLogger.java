@@ -1,11 +1,13 @@
 package com.epam.spring.core.loggers;
 
 import com.epam.spring.core.beans.Event;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class CacheFileEventLogger extends FileEventLogger {
 
     private int cacheSize;
