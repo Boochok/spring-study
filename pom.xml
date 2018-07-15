@@ -24,6 +24,7 @@
         <spring.ver>5.0.7.RELEASE</spring.ver>
         <commons-io.ver>2.6</commons-io.ver>
         <javax.annotation.ver>1.0</javax.annotation.ver>
+        <aspectj.ver>1.9.1</aspectj.ver>
     </properties>
 
     <dependencies>
@@ -59,15 +60,11 @@
             <artifactId>jsr250-api</artifactId>
             <version>${javax.annotation.ver}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
         <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>jsr250-api</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>jsr250-api</artifactId>
-            <version>1.0</version>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.ver}</version>
         </dependency>
 
 

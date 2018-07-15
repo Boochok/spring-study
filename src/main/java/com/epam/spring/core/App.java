@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Map;
@@ -16,6 +17,7 @@ import java.util.Optional;
 import static com.epam.spring.core.beans.EventType.ERROR;
 import static com.epam.spring.core.beans.EventType.INFO;
 
+@Component
 public class App {
 
     @Autowired
@@ -38,7 +40,6 @@ public class App {
                 .or(()-> Optional.of(defaultEventLogger))
                 .get()
                 .logEvent(event);
-
     }
 
     public static void main(String[] args) throws IOException {

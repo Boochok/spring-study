@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.io.File;
 import java.io.IOException;
@@ -14,8 +13,6 @@ import java.util.List;
 
 @Component
 public class CacheFileEventLogger extends FileEventLogger {
-    @Autowired
-    FileEventLogger fileEventLogger;
 
     private int cacheSize;
 
