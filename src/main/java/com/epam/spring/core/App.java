@@ -1,5 +1,6 @@
 package com.epam.spring.core;
 
+import com.epam.spring.core.aspects.StatisticsAspect;
 import com.epam.spring.core.beans.Client;
 import com.epam.spring.core.beans.Event;
 import com.epam.spring.core.beans.EventType;
@@ -29,6 +30,9 @@ public class App {
     private Map<EventType, EventLogger> loggers;
 
     @Autowired
+    private StatisticsAspect statisticsAspect;
+
+    @Autowired
     public App(Client client, Map<EventType, EventLogger> loggers) {
         this.client = client;
         this.loggers = loggers;
@@ -42,7 +46,7 @@ public class App {
                 .logEvent(event);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         ConfigurableApplicationContext ctx =
                 new AnnotationConfigApplicationContext(AppConfig.class);//it's possible to give several configs, Spring union them into one
 
@@ -52,7 +56,12 @@ public class App {
         app.logEvent("Some event for user 2", ctx.getBean(Event.class), ERROR);
         app.logEvent("Some event for user 1", (Event) ctx.getBean("event"), INFO);
         app.logEvent("Some event for user 34", (Event) ctx.getBean("event"), null);
+        app.logEvent("Some event for user 35", (Event) ctx.getBean("event"), INFO);
+        app.logEvent("Some event for user 36", (Event) ctx.getBean("event"), INFO);
+        app.logEvent("Some event for user 37", (Event) ctx.getBean("event"), null);
 
+        app.statisticsAspect.getCounter().forEach((log, count) -> System.out.println(log.getSimpleName() + " - "
+                + count));
         ctx.close();
     }
 }

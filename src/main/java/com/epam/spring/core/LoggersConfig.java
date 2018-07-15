@@ -1,6 +1,7 @@
 package com.epam.spring.core;
 
 import com.epam.spring.core.aspects.LoggingAspect;
+import com.epam.spring.core.aspects.StatisticsAspect;
 import com.epam.spring.core.loggers.CacheFileEventLogger;
 import com.epam.spring.core.loggers.CombinedEventLogger;
 import com.epam.spring.core.loggers.ConsoleEventLogger;
@@ -57,5 +58,10 @@ public class LoggersConfig {
     @Bean
     public LoggingAspect loggingAspect(){
         return new LoggingAspect();
+    }
+
+    @Bean
+    public StatisticsAspect statisticsAspect() {
+        return new StatisticsAspect();
     }
 }

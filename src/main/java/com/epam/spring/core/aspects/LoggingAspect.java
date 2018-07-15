@@ -13,13 +13,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoggingAspect {
 
-    @Pointcut("execution(* com.epam.spring.core.loggers.EventLogger.logEvent(..)))")
-    public void allLogEventMethods() {
+    @Pointcut("execution(* com.epam.spring.core.loggers.EventLogger.logEvent(..))")
+    private void allLogEventMethods() {
     }
 
     @Pointcut("allLogEventMethods() && within(*.*File*Logger)")
     private void logEventInsideFileLoggers() {
     }
+
+    @Pointcut("execution(* com.epam.spring.core.loggers.ConsoleEventLogger.logEvent(..))")
+    public void consoleLogEvent(){}
 
     @Before("allLogEventMethods()")//can be @Before("execution(**.logEvent(..))") instead of pointcut but pointcut can't be reused
     public void logBefore(JoinPoint joinPoint) {
