@@ -5,14 +5,18 @@ import com.epam.spring.core.aspects.StatisticsAspect;
 import com.epam.spring.core.loggers.CacheFileEventLogger;
 import com.epam.spring.core.loggers.CombinedEventLogger;
 import com.epam.spring.core.loggers.ConsoleEventLogger;
+import com.epam.spring.core.loggers.DBLogger;
 import com.epam.spring.core.loggers.EventLogger;
 import com.epam.spring.core.loggers.FileEventLogger;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import java.util.ArrayList;
 
@@ -63,5 +67,23 @@ public class LoggersConfig {
     @Bean
     public StatisticsAspect statisticsAspect() {
         return new StatisticsAspect();
+    }
+
+    @Value("${jdbc.url}")
+    String url;
+
+    @Value("${jdbc.driverClassName}")
+    String driver;
+    @Bean
+    public JdbcTemplate jdbcTemplate(){
+        DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+        driverManagerDataSource.setDriverClassName(driver);
+        driverManagerDataSource.setUrl(url);
+        return new JdbcTemplate(driverManagerDataSource);
+    }
+
+    @Bean
+    public DBLogger dbLogger() {
+        return new DBLogger();
     }
 }

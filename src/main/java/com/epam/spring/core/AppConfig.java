@@ -28,6 +28,8 @@ public class AppConfig {
         return new App(client(), new HashMap<EventType, EventLogger>(){{
             put(EventType.ERROR, loggersConfig.combinedEventLogger());
             put(EventType.INFO, loggersConfig.consoleEventLogger());
+            put(EventType.DEBUG, loggersConfig.dbLogger());
+
         }});
     }
 
@@ -52,5 +54,11 @@ public class AppConfig {
     @Qualifier("error")
     public EventType eventTypeError(){
         return EventType.ERROR;
+    }
+
+    @Bean
+    @Qualifier("debug")
+    public EventType eventTypeDebug(){
+        return EventType.DEBUG;
     }
 }

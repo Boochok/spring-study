@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
 
+import static com.epam.spring.core.beans.EventType.DEBUG;
 import static com.epam.spring.core.beans.EventType.ERROR;
 import static com.epam.spring.core.beans.EventType.INFO;
 
@@ -59,6 +60,7 @@ public class App {
         app.logEvent("Some event for user 35", (Event) ctx.getBean("event"), INFO);
         app.logEvent("Some event for user 36", (Event) ctx.getBean("event"), INFO);
         app.logEvent("Some event for user 37", (Event) ctx.getBean("event"), null);
+        app.logEvent("Some event for user 215", (Event) ctx.getBean("event"), DEBUG);
 
         app.statisticsAspect.getCounter().forEach((log, count) -> System.out.println(log.getSimpleName() + " - "
                 + count));
